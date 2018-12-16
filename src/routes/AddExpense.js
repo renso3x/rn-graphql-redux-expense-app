@@ -8,6 +8,7 @@ import Form from '../components/Form';
 
 class AddExpense extends Component {
   submit = async (values) => {
+    console.log(values);
     const response = await this.props.mutate({
       variables: values,
       update: (store, { data: { createExpense } }) => {
@@ -22,6 +23,7 @@ class AddExpense extends Component {
       },
     });
 
+    console.log(response);
     if (response) {
       this.props.history.goBack();
     }

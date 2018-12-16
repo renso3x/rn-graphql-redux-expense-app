@@ -1,5 +1,6 @@
 import React from 'react';
-import { AsyncStorage, Button, View } from 'react-native';
+import { AsyncStorage, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -29,7 +30,7 @@ class Login extends React.Component {
     this.setState(state => ({
       values: {
         ...state.values,
-        [key]: value,
+        [key]: value.toLowerCase(),
       },
     }));
   };
@@ -41,9 +42,11 @@ class Login extends React.Component {
 
     this.setState({ isSubmitting: true });
 
+    console.log(this.state.values);
     const response = await this.props.mutate({
       variables: this.state.values,
     });
+    console.log(response);
 
     if (response) {
       await AsyncStorage.setItem('token', response.data.signin.payload.token);
@@ -63,17 +66,17 @@ class Login extends React.Component {
       <View
         style={styles.view}
       >
-        <View style={{ width: 200 }}>
-          <TextField value={email} name="email" onChangeText={this.onChangeText} />
+        <View style={{ width: 350 }}>
+          <TextField value={email} autoCapitalize="none" name="email" onChangeText={this.onChangeText} />
           <TextField
             value={password}
             name="password"
             onChangeText={this.onChangeText}
             secureTextEntry
           />
-          <Button title="Login" onPress={this.submit} />
+          <Button mode="contained" onPress={this.submit}>Login</Button>
         </View>
-      </View>
+      </View >
     );
   }
 }

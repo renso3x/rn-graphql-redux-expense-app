@@ -17,7 +17,7 @@ export default class TextField extends React.PureComponent {
   };
 
   render() {
-    const { value, secureTextEntry, name } = this.props;
+    const { value, secureTextEntry, name, keyboardType } = this.props;
 
     return (
       <TextInput
@@ -26,6 +26,7 @@ export default class TextField extends React.PureComponent {
         type={'outlined'}
         style={styles.field}
         placeholder={name}
+        keyboardType={keyboardType}
         secureTextEntry={!!secureTextEntry}
       />
     );

@@ -48,8 +48,11 @@ class Form extends React.Component {
     if (this.state.isSubmitting) {
       return;
     }
-    console.log(this.state.values);
-    this.props.submit(this.state.values);
+    const newValue = {
+      ...this.state.values,
+      price: parseInt(this.state.values.price, 10),
+    };
+    this.props.submit(newValue);
   };
 
   render() {
@@ -62,7 +65,7 @@ class Form extends React.Component {
       >
         <View style={{ width: 300 }}>
           <TextField value={name} name="name" onChangeText={this.onChangeText} />
-          <TextField value={price} name="price" onChangeText={this.onChangeText} />
+          <TextField value={price} name="price" keyboardType="numeric" onChangeText={this.onChangeText} />
           <Button onPress={this.submit} style={styles.btn} color="green" mode="contained">Submit</Button>
           <Button onPress={goBack} style={styles.btn} color="blue" mode="contained">Back</Button>
         </View>
